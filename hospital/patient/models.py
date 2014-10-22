@@ -74,10 +74,6 @@ class Patient(models.Model):
         default=timezone.now,
         verbose_name=_('date joined'),
     )
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name=_('is active'),
-    )
 
     def __unicode__(self):
         return unicode(self.dni)
