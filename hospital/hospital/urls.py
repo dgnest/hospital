@@ -24,6 +24,10 @@ urlpatterns = patterns(
             namespace='rest_framework'
         )
     ),
+    # Home app.
+    url(r'^', include('home.urls', namespace='home_app')),
+    # Patient app.
+    url(r'^', include('patient.urls', namespace='patient_app')),
 )
 
 
