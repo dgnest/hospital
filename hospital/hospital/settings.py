@@ -14,10 +14,12 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
 
+GRAPPELLI_ADMIN_TITLE = 'HOSPITAL'
 
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
