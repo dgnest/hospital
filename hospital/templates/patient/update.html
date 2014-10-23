@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+  <h1>Modificar Paciente</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>
+      <label for="">dni</label>
+      <input name="dni" type="text" value="{{ patient.dni }}">
+    </p>
+
+    <p>
+      <label for="">first_name</label>
+      <input name="first_name" type="text" value="{{ patient.first_name }}">
+    </p>
+
+    <p>
+      <label for="">last_name</label>
+      <input name="last_name" type="text" value="{{ patient.last_name }}">
+    </p>
+
+    <p>
+      <label for="">age</label>
+      <input name="age" type="number" value="{{ patient.age }}">
+    </p>
+
+    <p>
+      <label for="">sex</label>
+      <select name="sex">
+        <option value="M" {% if patient.sex == "M" %} selected {% endif %}>Masculino</option>
+        <option value="F" {% if patient.sex == "F" %} selected {% endif %}>Femenino</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="">address</label>
+      <input name="address" type="text" value="{{ patient.address }}">
+    </p>
+
+    <p>
+      <label for="">email</label>
+      <input name="email" type="email" value="{{ patient.email }}">
+    </p>
+
+    <p>
+      <label for="">telephone</label>
+      <input name="telephone" type="text" value="{{ patient.telephone }}">
+    </p>
+
+    <p>
+      <label for="">cellphone</label>
+      <input name="cellphone" type="text" value="{{ patient.cellphone }}">
+    </p>
+
+    <input type="submit" value="Update" />
+  </form>
+
+  <section>
+    <p>
+      <a href="{% url 'patient_app:patients-list' %}"> Volver a la Lista </a>
+    </p>
+    <p>
+      <a href="{% url 'patient_app:patients-delete' patient.dni %}"> Eliminar Paciente </a>
+    </p>
+  </section>
+
+</body>
+
+</html>

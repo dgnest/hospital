@@ -10,9 +10,27 @@
 
 <body>
 
-  <h1>Paciente {{ object.dni }}</h1>
-  <p>{{ object.first_name }}</p>
-  <p>Date Joined: {{ object.date_joined|date }}</p>
+  <h1>Paciente DNI: {{ object.dni }}</h1>
+  <p>creador: {{ object.superuser.username }}</p>
+  <p>nombre: {{ object.first_name }}</p>
+  <p>apellido: {{ object.last_name }}</p>
+  <p>edad: {{ object.age }}</p>
+  <p>sexo: {{ object.sex }}</p>
+  <p>direccion: {{ object.address }}</p>
+  <p>email: {{ object.email }}</p>
+  <p>telefono: {{ object.telephone }}</p>
+  <p>celular: {{ object.cellphone }}</p>
+  <p>Fecha de Creacion: {{ object.date_joined|date }}</p>
+
+  <p>
+    <a href="{% url 'patient_app:patients-list' %}"> Volver a la Lista </a>
+  </p>
+  <p>
+    <a href="{% url 'patient_app:patients-update' object.dni %}"> Modificar Paciente </a>
+  </p>
+  <p>
+    <a href="{% url 'patient_app:patients-delete' object.dni %}"> Eliminar Paciente </a>
+  </p>
 
 </body>
 
