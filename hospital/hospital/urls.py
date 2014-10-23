@@ -4,10 +4,12 @@ from django.conf import settings
 
 from rest_framework import routers
 from patient.views import PatientViewSet
+from expose_the_user.views import UserViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'patients', PatientViewSet)
+router.register(r'users', UserViewSet)
 
 
 urlpatterns = patterns(
