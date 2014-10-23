@@ -61,6 +61,11 @@
       <input name="cellphone" type="text" value="{{ patient.cellphone }}">
     </p>
 
+    <p>
+      <label for="">is_inpatient</label>
+      <input name="is_inpatient" type="checkbox" value="{{ patient.is_inpatient }}" {% if patient.is_inpatient %} checked {% endif %}>
+    </p>
+
     <input type="submit" value="Update" />
   </form>
 

@@ -1,32 +1,58 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-primary">
 
-  <h1>Pacientes</h1>
-  <ul>
-    {% for patient in object_list %}
-        <li>
-            {{ patient.date_joined|date }} - {{ patient.first_name }}: - <a href="{% url 'patient_app:patients-detail' patient.dni %}">{{ patient.dni }}</a>
-        </li>
-    {% empty %}
-        <li>No patients yet.</li>
-    {% endfor %}
-  </ul>
+  <div class="panel-heading">
+    <h1 class="panel-title">Pacientes</h1>
+  </div>
 
-  <section>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>DNI</th>        
+        <th>Nombres</th>        
+        <th>Apellidos</th>        
+        <th>Edad</th>        
+        <th>Sexo</th>        
+        <th>Email</th>        
+        <th>Esta Internado?</th>        
+        <th>Reclutador</th>        
+        <th>Fecha de Creacion</th>        
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in object_list %}
+        <tr>
+          <td><a href="{% url 'patient_app:patients-detail' patient.dni %}">{{ patient.dni }}</a></td>
+          <td>{{ patient.first_name }}</td>
+          <td>{{ patient.last_name }}</td>
+          <td>{{ patient.age }}</td>
+          <td>{{ patient.sex }}</td>
+          <td>{{ patient.email }}</td>
+          <td>
+            {% if patient.is_inpatient %}
+              <span class="glyphicon glyphicon-ok"></span>
+            {% else %}
+              <span class="glyphicon glyphicon-remove"></span>
+            {% endif %}
+          </td>
+          <td>{{ patient.superuser.username }}</td>
+          <td>{{ patient.date_joined|date }}</td>
+        </tr>
+      {% empty %}
+        Aun no hay pacientes!
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <article class="panel-body">
     <p>
-      <a href="{% url 'patient_app:patients-create' %}"> Crear Paciente </a>
+      <a href="{% url 'patient_app:patients-create' %}" class="btn btn-primary"> Crear Paciente </a>
     </p>
-  </section>
+  </article>
 
-</body>
-
-</html>
+{% endblock content %}

@@ -1,32 +1,51 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
+<div class="panel panel-primary">
 
-<body>
-
-  <h1>Usuarios</h1>
-  <ul>
+  <div class="panel-heading">
+    <h1 class="panel-title">Usuarios</h1>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Usuario</th>        
+        <th>Nombres</th>        
+        <th>Apellidos</th>        
+        <th>Es medico</th>        
+        <th>Fecha de Creacion</th>        
+        <th>Fecha del ultimo logeo</th>        
+      </tr>
+    </thead>
+    <tbody>
     {% for my_user in object_list %}
-        <li>
-            {{ my_user.date_joined|date }} - {{ my_user.first_name }}: - <a href="{% url 'user_app:users-detail' my_user.id %}">{{ my_user.username }}</a>
-        </li>
+    <tr>
+    <td><a href="{% url 'user_app:users-detail' my_user.id %}">{{ my_user.username }}</a></td>
+    <td>{{ my_user.first_name }}</td>
+    <td>{{ my_user.last_name }}</td>
+    <td>
+      {% if my_user.is_superuser %}
+        <span class="glyphicon glyphicon-ok"></span>
+      {% else %}
+        <span class="glyphicon glyphicon-remove"></span>
+      {% endif %}
+    </td>
+    <td>{{ my_user.date_joined|date }}</td>
+    <td>{{ my_user.last_login|date }}</td>
+    </tr>
     {% empty %}
-        <li>No patients yet.</li>
+        No Hay Usuarios!
     {% endfor %}
-  </ul>
+    </tbody>
+  </table>
 
-  <section>
-  <p>
-    <a href="{% url 'user_app:users-create' %}"> Crear Usuario </a>
-  </p>
-  </section>
+  <article class="panel-body">
+    <p>
+      <a href="{% url 'user_app:users-create' %}" class="btn btn-primary"> Crear Usuario </a>
+    </p>
+  </article>
 
-</body>
-
-</html>
+</div>
+{% endblock content %}
