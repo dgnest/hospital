@@ -24,5 +24,6 @@ class PatientSerializer(serializers.ModelSerializer):
             'email',
             'telephone',
             'cellphone',
+            'is_inpatient',
             'date_joined',
         )

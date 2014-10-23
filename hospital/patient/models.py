@@ -70,6 +70,10 @@ class Patient(models.Model):
         blank=True,
         verbose_name=_('cellphone'),
     )
+    is_inpatient = models.BooleanField(
+        default=False,
+        verbose_name=_('is inpatient'),
+    )
     date_joined = models.DateTimeField(
         default=timezone.now,
         verbose_name=_('date joined'),

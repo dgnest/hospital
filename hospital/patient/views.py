@@ -31,6 +31,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         'email',
         'telephone',
         'cellphone',
+        'is_inpatient',
     )
 
     def pre_save(self, obj):
@@ -67,6 +68,7 @@ def record_patient(request):
     email = request.POST['email']
     telephone = request.POST['telephone']
     cellphone = request.POST['cellphone']
+    is_inpatient = request.POST['is_inpatient']
 
     patient = Patient.objects.create(
         dni=dni,
@@ -79,6 +81,7 @@ def record_patient(request):
         email=email,
         telephone=telephone,
         cellphone=cellphone,
+        is_inpatient=is_inpatient,
     )
 
     return patient
@@ -111,6 +114,7 @@ def update_patient(request):
     email = request.POST['email']
     telephone = request.POST['telephone']
     cellphone = request.POST['cellphone']
+    is_inpatient = request.POST['is_inpatient']
 
     patient = get_object_or_404(Patient, pk=dni)
     patient.dni = dni
@@ -122,6 +126,7 @@ def update_patient(request):
     patient.email = email
     patient.telephone = telephone
     patient.cellphone = cellphone
+    patient.is_inpatient = is_inpatient
     patient.save()
 
     return patient
