@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+  <h1>Modificar Paciente</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>
+      <label for="">username</label>
+      <input name="username" type="text" value="{{ my_user.username }}">
+    </p>
+
+    <p>
+      <label for="">first_name</label>
+      <input name="first_name" type="text" value="{{ my_user.first_name }}">
+    </p>
+
+    <p>
+      <label for="">last_name</label>
+      <input name="last_name" type="text" value="{{ my_user.last_name }}">
+    </p>
+
+    <p>
+      <label for="">email</label>
+      <input name="email" type="email" value="{{ my_user.email }}">
+    </p>
+
+    <p>
+      <label for="">is_superuser</label>
+      <input name="is_superuser" type="checkbox" value="{{ my_user.is_superuser }}" {% if my_user.is_superuser %} checked {% endif %}>
+    </p>
+
+    <input type="submit" value="Update" />
+  </form>
+
+  <section>
+    <p>
+      <a href="{% url 'user_app:users-list' %}"> Volver a la Lista </a>
+    </p>
+    <p>
+      <a href="{% url 'user_app:users-delete' my_user.pk %}"> Eliminar Usuario </a>
+    </p>
+  </section>
+
+</body>
+
+</html>

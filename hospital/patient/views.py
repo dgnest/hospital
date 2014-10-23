@@ -2,9 +2,9 @@ from django.shortcuts import render_to_response
 from rest_framework import viewsets
 from rest_framework import permissions
 from hospital.permissions import IsSuperuserOrReadOnly
+from hospital.mixins import LoginRequiredMixin
 from .serializers import PatientSerializer
 from .models import Patient
-from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic import DeleteView
@@ -13,14 +13,6 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
-
-
-class LoginRequiredMixin(object):
-
-    @classmethod
-    def as_view(cls, **initkwargs):
-        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
-        return login_required(view)
 
 
 class PatientViewSet(viewsets.ModelViewSet):

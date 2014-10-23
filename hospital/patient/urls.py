@@ -5,24 +5,24 @@ from .views import patient_create_view, patient_update_view
 
 urlpatterns = patterns(
     '',
-    url(r'^patients/$', PatientListView.as_view(), name='patients-list'),
+    url(r'^$', PatientListView.as_view(), name='patients-list'),
     url(
-        r'^patients/create/$',
+        r'^create/$',
         patient_create_view,
         name='patients-create',
     ),
     url(
-        r'^patients/delete/(?P<pk>[\w]+)/$',
+        r'^delete/(?P<pk>[\w]+)/$',
         PatientDeleteView.as_view(),
         name='patients-delete',
     ),
     url(
-        r'^patients/update/(?P<dni>[\w]+)/$',
+        r'^update/(?P<dni>[\w]+)/$',
         patient_update_view,
         name='patients-update',
     ),
     url(
-        r'^patients/(?P<pk>[\w]+)/$',
+        r'^(?P<pk>[\w]+)/$',
         PatientDetailView.as_view(),
         name='patients-detail',
     ),

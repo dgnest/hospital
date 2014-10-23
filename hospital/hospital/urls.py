@@ -29,7 +29,9 @@ urlpatterns = patterns(
     # Home app.
     url(r'^', include('home.urls', namespace='home_app')),
     # Patient app.
-    url(r'^', include('patient.urls', namespace='patient_app')),
+    url(r'^patients/', include('patient.urls', namespace='patient_app')),
+    # User app.
+    url(r'^users/', include('expose_the_user.urls', namespace='user_app')),
 )
 
 

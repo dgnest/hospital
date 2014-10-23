@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+  <h1>Usuarios</h1>
+  <ul>
+    {% for my_user in object_list %}
+        <li>
+            {{ my_user.date_joined|date }} - {{ my_user.first_name }}: - <a href="{% url 'user_app:users-detail' my_user.id %}">{{ my_user.username }}</a>
+        </li>
+    {% empty %}
+        <li>No patients yet.</li>
+    {% endfor %}
+  </ul>
+
+  <section>
+  <p>
+    <a href="{% url 'user_app:users-create' %}"> Crear Usuario </a>
+  </p>
+  </section>
+
+</body>
+
+</html>
