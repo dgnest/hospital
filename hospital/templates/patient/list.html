@@ -6,7 +6,7 @@
 <div class="panel panel-primary">
 
   <div class="panel-heading">
-    <h1 class="panel-title">Pacientes</h1>
+    <h1 class="panel-title">Lista de Pacientes</h1>
   </div>
 
 
@@ -19,9 +19,9 @@
         <th>Edad</th>        
         <th>Sexo</th>        
         <th>Email</th>        
-        <th>Esta Internado?</th>        
+        <th>¿Está Internado?</th>        
         <th>Reclutador</th>        
-        <th>Fecha de Creacion</th>        
+        <th>Fecha de Creación</th>        
       </tr>
     </thead>
     <tbody>
@@ -51,8 +51,10 @@
 
   <article class="panel-body">
     <p>
-      <a href="{% url 'patient_app:patients-create' %}" class="btn btn-primary"> Crear Paciente </a>
+      <a href="{% url 'patient_app:patients-create' %}" class="btn btn-success btn-block"> Crear Paciente </a>
     </p>
   </article>
+
+</div>
 
 {% endblock content %}

@@ -5,7 +5,7 @@
 <div class="panel panel-primary">
 
   <div class="panel-heading">
-    <h1 class="panel-title">Usuarios</h1>
+    <h1 class="panel-title">Lista de Usuarios</h1>
   </div>
   
   <table class="table table-striped">
@@ -14,9 +14,9 @@
         <th>Usuario</th>        
         <th>Nombres</th>        
         <th>Apellidos</th>        
-        <th>Es medico</th>        
-        <th>Fecha de Creacion</th>        
-        <th>Fecha del ultimo logeo</th>        
+        <th>¿Es médico?</th>        
+        <th>Fecha de Creación</th>        
+        <th>Fecha del último login</th>        
       </tr>
     </thead>
     <tbody>
@@ -43,9 +43,10 @@
 
   <article class="panel-body">
     <p>
-      <a href="{% url 'user_app:users-create' %}" class="btn btn-primary"> Crear Usuario </a>
+      <a href="{% url 'user_app:users-create' %}" class="btn btn-success btn-block"> Crear Usuario </a>
     </p>
   </article>
 
 </div>
+
 {% endblock content %}

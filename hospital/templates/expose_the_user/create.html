@@ -1,50 +1,51 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-primary">
 
-  <h1>Crear Usuario</h1>
-  <form action="" method="post">
-    {% csrf_token %}
+  <div class="panel-heading">
+    <h1 class="panel-title">Crear Usuario</h1>
+  </div>
+
+  <article class="panel-body">
+    <form action="" method="post" role="form">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="">Usuario</label>
+        <input name="username" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="">Nombres</label>
+        <input name="first_name" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="">Apellidos</label>
+        <input name="last_name" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="">Email</label>
+        <input name="email" type="email" class="form-control">
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input name="is_superuser" type="checkbox"> ¿Es superusuario?
+        </label>
+      </div>
+      
+      <p>
+        <button type="submit" class="btn btn-success btn-block"/> Crear</button>
+      </p>
+    </form>
+
     <p>
-      <label for="">username</label>
-      <input name="username" type="text">
+      <a href="{% url 'user_app:users-list' %}" class="btn btn-primary btn-block"> Volver a la Lista </a>
     </p>
+  </article>
 
-    <p>
-      <label for="">first_name</label>
-      <input name="first_name" type="text">
-    </p>
-
-    <p>
-      <label for="">last_name</label>
-      <input name="last_name" type="text">
-    </p>
-
-    <p>
-      <label for="">email</label>
-      <input name="email" type="email">
-    </p>
-
-    <p>
-      <label for="">is_superuser</label>
-      <input name="is_superuser" type="checkbox">
-    </p>
-
-    <input type="submit" value="Create" />
-  </form>
-
-  <p>
-    <a href="{% url 'user_app:users-list' %}"> Volver a la Lista </a>
-  </p>
-
-</body>
-
-</html>
+{% endblock content %}
