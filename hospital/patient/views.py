@@ -68,7 +68,7 @@ def record_patient(request):
     email = request.POST['email']
     telephone = request.POST['telephone']
     cellphone = request.POST['cellphone']
-    is_inpatient = request.POST['is_inpatient']
+    is_inpatient = request.POST.get('is_inpatient', False)
 
     patient = Patient.objects.create(
         dni=dni,
