@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+    <h1 class="panel-title">Lista de Medicinas <i class="fa fa-medkit"></i></h1>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Código</th>        
+        <th>Nombre</th>        
+        <th>Tipo</th>        
+        <th>Cantidad</th>        
+      </tr>
+    </thead>
+    <tbody>
+      {% for medicine in object_list %}
+        <tr>
+          <td><a href="{% url 'medicine_app:medicines-detail' medicine.code %}">{{ medicine.code }}</a></td>
+          <td>{{ medicine.name }}</td>
+          <td>{{ medicine.medicine_type }}</td>
+          <td>{{ medicine.amount }}</td>
+        </tr>
+      {% empty %}
+        Aun no hay medicinas!
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <article class="panel-body">
+    <p>
+      <a href="{% url 'medicine_app:medicines-create' %}" class="btn btn-success btn-block"> Agregar Medicina </a>
+    </p>
+  </article>
+
+</div>
+
+{% endblock content %}

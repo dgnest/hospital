@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="panel panel-danger">
+
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      Eliminación del Medicamento <strong>{{ object.code }} - {{ object.name|title }}</strong> <i class="fa fa-trash"></i>
+    </h1>
+  </div>
+
+  <article class="panel-body">
+    <form action="" method="post">
+      {% csrf_token %}
+      <h2>¿Está seguro que desea eliminar al medicamento <strong>{{ object.code }} - {{ object.name|title }}</strong>?</h2>
+      <p>
+        <button type="submit" class="btn btn-danger btn-block"/>Confirmar</button>
+      </p>
+    </form>
+
+    <section>
+      <p>
+        <a href="{% url 'medicine_app:medicines-list' %}" class="btn btn-success btn-block"> Volver a la Lista </a>
+      </p>
+      <p>
+        <a href="{% url 'medicine_app:medicines-update' object.code %}" class="btn btn-primary btn-block"> Modificar Medicamento </a>
+      </p>
+    </section>
+
+  </article>
+
+</div>
+
+{% endblock content %}

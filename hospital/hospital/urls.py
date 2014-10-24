@@ -5,11 +5,13 @@ from django.conf import settings
 from rest_framework import routers
 from patient.views import PatientViewSet
 from expose_the_user.views import UserViewSet
+from medicine.views import MedicineViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'patients', PatientViewSet)
 router.register(r'users', UserViewSet)
+router.register(r'medicines', MedicineViewSet)
 
 
 urlpatterns = patterns(
@@ -32,6 +34,8 @@ urlpatterns = patterns(
     url(r'^patients/', include('patient.urls', namespace='patient_app')),
     # User app.
     url(r'^users/', include('expose_the_user.urls', namespace='user_app')),
+    # Medicine app.
+    url(r'^medicines/', include('medicine.urls', namespace='medicine_app')),
 )
 
 
