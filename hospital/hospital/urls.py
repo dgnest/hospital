@@ -6,12 +6,14 @@ from rest_framework import routers
 from patient.views import PatientViewSet
 from expose_the_user.views import UserViewSet
 from medicine.views import MedicineViewSet
+from consultation.views import MedicalConsultationViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'patients', PatientViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'medicines', MedicineViewSet)
+router.register(r'consultations', MedicalConsultationViewSet)
 
 
 urlpatterns = patterns(
