@@ -13,23 +13,28 @@
     <form action="" method="post" role="form">
       {% csrf_token %}
       <div class="form-group">
-        <label for="">Usuario</label>
-        <input name="username" type="text" class="form-control">
+        <label for="username">Usuario</label>
+        <input name="username" id="username" type="text" class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="">Nombres</label>
-        <input name="first_name" type="text" class="form-control">
+        <label for="first_name">Nombres</label>
+        <input name="first_name" id="first_name" type="text" class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="">Apellidos</label>
-        <input name="last_name" type="text" class="form-control">
+        <label for="last_name">Apellidos</label>
+        <input name="last_name" id="last_name" type="text" class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="">Email</label>
-        <input name="email" type="email" class="form-control">
+        <label for="email">Email</label>
+        <input name="email" id="email" type="email" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input name="password" id="password" type="password" class="form-control">
       </div>
 
       <div class="checkbox">

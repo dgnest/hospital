@@ -59,6 +59,7 @@ def record_user(request):
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     email = request.POST['email']
+    password = request.POST['password']
     is_superuser = request.POST.get('is_superuser', False)
 
     user = User.objects.create(
@@ -68,6 +69,8 @@ def record_user(request):
         email=email,
         is_superuser=is_superuser,
     )
+    user.set_password(password)
+    user.save()
 
     return user
 
@@ -94,6 +97,7 @@ def update_user(request, pk):
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     email = request.POST['email']
+    password = request.POST['password']
     is_superuser = request.POST.get('is_superuser', False)
 
     user = get_object_or_404(User, pk=pk)

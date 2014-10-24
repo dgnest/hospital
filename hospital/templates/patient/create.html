@@ -1,78 +1,79 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-primary">
 
-  <h1>Crear Pacientes</h1>
-  <form action="" method="post">
-    {% csrf_token %}
+  <div class="panel-heading">
+    <h1 class="panel-title">Crear Paciente</h1>
+  </div>
+
+  <article class="panel-body">
+    <form action="" method="post" role="form">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="dni">DNI</label>
+        <input name="dni" id="dni" type="text" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="first_name">Nombres</label>
+        <input name="first_name" id="first_name" type="text" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Apellido</label>
+        <input name="last_name" id="last_name" type="text" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Edad</label>
+        <input name="age" id="age" type="number" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="sex">Sexo</label>
+        <select name="sex" id="sex" class="form-control" required>
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+      </p>
+
+      <div class="form-group">
+        <label for="address">Dirección</label>
+        <input name="address" id="address" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input name="email" id="email" type="email" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="telephone">Teléfono</label>
+        <input name="telephone" id="telephone" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="cellphone">Celular</label>
+        <input name="cellphone" id="cellphone" type="text" class="form-control">
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input name="is_inpatient" type="checkbox"> ¿Está Internado?
+        </label>
+      </div>
+
+      <p>
+        <button type="submit" class="btn btn-success btn-block"/> Crear</button>
+      </p>
+    </form>
+
     <p>
-      <label for="">dni</label>
-      <input name="dni" type="text">
+      <a href="{% url 'patient_app:patients-list' %}" class="btn btn-primary btn-block"> Volver a la Lista </a>
     </p>
+  </article>
 
-    <p>
-      <label for="">first_name</label>
-      <input name="first_name" type="text">
-    </p>
-
-    <p>
-      <label for="">last_name</label>
-      <input name="last_name" type="text">
-    </p>
-
-    <p>
-      <label for="">age</label>
-      <input name="age" type="number">
-    </p>
-
-    <p>
-      <label for="">sex</label>
-      <select name="sex">
-        <option value="M">Masculino</option>
-        <option value="F">Femenino</option>
-      </select>
-    </p>
-
-    <p>
-      <label for="">address</label>
-      <input name="address" type="text">
-    </p>
-
-    <p>
-      <label for="">email</label>
-      <input name="email" type="email">
-    </p>
-
-    <p>
-      <label for="">telephone</label>
-      <input name="telephone" type="text">
-    </p>
-
-    <p>
-      <label for="">cellphone</label>
-      <input name="cellphone" type="text">
-    </p>
-
-    <p>
-      <label for="">is_inpatient</label>
-      <input name="is_inpatient" type="checkbox">
-    </p>
-
-    <input type="submit" value="Create" />
-  </form>
-
-  <p>
-    <a href="{% url 'patient_app:patients-list' %}"> Volver a la Lista </a>
-  </p>
-
-</body>
-
-</html>
+{% endblock content %}
