@@ -1,55 +1,59 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-primary">
 
-  <h1>Modificar Paciente</h1>
-  <form action="" method="post">
-    {% csrf_token %}
-    <p>
-      <label for="">username</label>
-      <input name="username" type="text" value="{{ my_user.username }}">
-    </p>
+  <div class="panel-heading">
+    <h1 class="panel-title">Modificar Usuario</h1>
+  </div>
 
-    <p>
-      <label for="">first_name</label>
-      <input name="first_name" type="text" value="{{ my_user.first_name }}">
-    </p>
+  <article class="panel-body">
+    <form action="" method="post" role="form">
+      {% csrf_token %}
 
-    <p>
-      <label for="">last_name</label>
-      <input name="last_name" type="text" value="{{ my_user.last_name }}">
-    </p>
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input name="username" id="username" type="text" class="form-control" value="{{ my_user.username }}" readonly>
+      </div>
 
-    <p>
-      <label for="">email</label>
-      <input name="email" type="email" value="{{ my_user.email }}">
-    </p>
+      <div class="form-group">
+        <label for="first_name">Nombres</label>
+        <input name="first_name" id="first_name" type="text" class="form-control" value="{{ my_user.first_name }}">
+      </div>
 
-    <p>
-      <label for="">is_superuser</label>
-      <input name="is_superuser" type="checkbox" value="{{ my_user.is_superuser }}" {% if my_user.is_superuser %} checked {% endif %}>
-    </p>
+      <div class="form-group">
+        <label for="last_name">Apellidos</label>
+        <input name="last_name" id="last_name" type="text" class="form-control" value="{{ my_user.last_name }}">
+      </div>
 
-    <input type="submit" value="Update" />
-  </form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input name="email" id="email" type="email" class="form-control" value="{{ my_user.email }}">
+      </div>
 
-  <section>
-    <p>
-      <a href="{% url 'user_app:users-list' %}"> Volver a la Lista </a>
-    </p>
-    <p>
-      <a href="{% url 'user_app:users-delete' my_user.pk %}"> Eliminar Usuario </a>
-    </p>
-  </section>
+      <div class="checkbox">
+        <label>
+          <input name="is_superuser" type="checkbox" value="{{ my_user.is_superuser }}" {% if my_user.is_superuser %} checked {% endif %}> ¿Es superusuario?
+        </label>
+      </div>
 
-</body>
+      <p>
+        <button type="submit" class="btn btn-success btn-block"/>Modificar</button>
+      </p>
+    </form>
 
-</html>
+    <section>
+      <p>
+        <a href="{% url 'user_app:users-list' %}" class="btn btn-primary btn-block"> Volver a la Lista </a>
+      </p>
+      <p>
+        <a href="{% url 'user_app:users-delete' my_user.pk %}" class="btn btn-primary btn-block"> Eliminar Usuario </a>
+      </p>
+    </section>
+  </article>
+
+</div>
+
+{% endblock content %}

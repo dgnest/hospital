@@ -1,35 +1,57 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-primary">
 
-  <h1>Usuario: {{ object.username }}</h1>
-  <h2>ID: {{ object.id }}</h2>
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      Detalle del
+      {% if object.is_superuser %}
+        Superusuario <strong>{{ object.username }}</strong> <i class="fa fa-user"></i>
+      {% else %}
+        Médico <strong>{{ object.username }}</strong> <i class="fa fa-stethoscope"></i>
+      {% endif %}
+    </h1>
+  </div>
 
-  <p>nombre: {{ object.first_name }}</p>
-  <p>apellido: {{ object.last_name }}</p>
-  <p>email {{ object.email }}</p>
-  <p>Es medico?: {{ object.is_superuser }}</p>
-  <p>Ultima vez que ingreso: {{ object.last_login|date }}</p>
-  <p>Fecha de Creacion: {{ object.date_joined|date }}</p>
+  <article class="panel-body">
+    {% if object.id %}
+      <p>ID: <strong>{{ object.id }}</strong></p> 
+    {% endif %}
+    
+    {% if object.first_name %}
+      <p>Nombres: <strong>{{ object.first_name|title }}</strong></p> 
+    {% endif %}
+    
+    {% if object.last_name %}
+      <p>Apellidos: <strong>{{ object.last_name|title }}</strong></p> 
+    {% endif %}
+    
+    {% if object.email %}
+      <p>Email: <strong>{{ object.email }}</strong></p> 
+    {% endif %}
+    
+    {% if object.last_login %}
+      <p>Última vez que ingreso: <strong>{{ object.last_login|date }}</strong></p> 
+    {% endif %}
+    
+    {% if object.date_joined %}
+      <p>Fecha de Creación: <strong>{{ object.date_joined|date }}</strong></p> 
+    {% endif %}
 
-  <p>
-    <a href="{% url 'user_app:users-list' %}"> Volver a la Lista </a>
-  </p>
-  <p>
-    <a href="{% url 'user_app:users-update' object.id %}"> Modificar Usuario </a>
-  </p>
-  <p>
-    <a href="{% url 'user_app:users-delete' object.id %}"> Eliminar Usuario </a>
-  </p>
+    <p>
+      <a href="{% url 'user_app:users-list' %}" class="btn btn-primary btn-block"> Volver a la Lista </a>
+    </p>
+    <p>
+      <a href="{% url 'user_app:users-update' object.id %}" class="btn btn-primary btn-block"> Modificar Usuario </a>
+    </p>
+    <p>
+      <a href="{% url 'user_app:users-delete' object.id %}" class="btn btn-primary btn-block"> Eliminar Usuario </a>
+    </p>
+  </article>
 
-</body>
+</div>
 
-</html>
+{% endblock content %}

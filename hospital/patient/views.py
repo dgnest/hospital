@@ -104,8 +104,7 @@ def patient_create_view(request):
     return HttpResponseNotAllowed(['GET'])
 
 
-def update_patient(request):
-    dni = request.POST['dni']
+def update_patient(request, dni):
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     age = request.POST['age']
@@ -114,10 +113,9 @@ def update_patient(request):
     email = request.POST['email']
     telephone = request.POST['telephone']
     cellphone = request.POST['cellphone']
-    is_inpatient = request.POST['is_inpatient']
+    is_inpatient = request.POST.get('is_inpatient', False)
 
     patient = get_object_or_404(Patient, pk=dni)
-    patient.dni = dni
     patient.first_name = first_name
     patient.last_name = last_name
     patient.age = age
@@ -135,7 +133,7 @@ def update_patient(request):
 def patient_update_view(request, dni):
     if request.user.is_authenticated() and request.user.is_superuser:
         if request.method == "POST":
-            patient = update_patient(request)
+            patient = update_patient(request, dni)
             if patient:
                 return HttpResponseRedirect(
                     reverse('patient_app:patients-list')

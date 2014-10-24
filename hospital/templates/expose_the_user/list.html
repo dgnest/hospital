@@ -16,7 +16,6 @@
         <th>Apellidos</th>        
         <th>¿Es médico?</th>        
         <th>Fecha de Creación</th>        
-        <th>Fecha del último login</th>        
       </tr>
     </thead>
     <tbody>
@@ -27,13 +26,12 @@
     <td>{{ my_user.last_name }}</td>
     <td>
       {% if my_user.is_superuser %}
-        <span class="glyphicon glyphicon-ok"></span>
-      {% else %}
         <span class="glyphicon glyphicon-remove"></span>
+      {% else %}
+        <span class="glyphicon glyphicon-ok"></span>
       {% endif %}
     </td>
     <td>{{ my_user.date_joined|date }}</td>
-    <td>{{ my_user.last_login|date }}</td>
     </tr>
     {% empty %}
         No Hay Usuarios!

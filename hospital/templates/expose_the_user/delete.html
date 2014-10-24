@@ -1,28 +1,40 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-danger">
 
-  <form action="" method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm" />
-  </form>
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      Eliminación del
+      {% if object.is_superuser %}
+        Superusuario <strong>{{ object.username }}</strong> <i class="fa fa-user"></i>
+      {% else %}
+        Médico <strong>{{ object.username }}</strong> <i class="fa fa-stethoscope"></i>
+      {% endif %}
+    </h1>
+  </div>
 
-  <p>
-    <a href="{% url 'user_app:users-list' %}"> Volver a la Lista </a>
-  </p>
-  <p>
-    <a href="{% url 'user_app:users-update' object.pk %}"> Modificar Usuario </a>
-  </p>
+  <article class="panel-body">
+    <form action="" method="post" role="form">
+      {% csrf_token %}
+      <h2>¿Está seguro que desea eliminar a <strong>{{ object }}</strong>?</h2>
+      <p>
+        <button type="submit" class="btn btn-danger btn-block"/>Confirmar</button>
+      </p>
+    </form>
 
-</body>
+    <section>
+      <p>
+        <a href="{% url 'user_app:users-list' %}" class="btn btn-success btn-block"> Volver a la Lista </a>
+      </p>
+      <p>
+        <a href="{% url 'user_app:users-update' object.pk %}" class="btn btn-primary btn-block"> Modificar Usuario </a>
+      </p>
+    </section>
+  </article>
 
-</html>
+</div>
+
+{% endblock content %}

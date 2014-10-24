@@ -93,15 +93,12 @@ def user_create_view(request):
 
 
 def update_user(request, pk):
-    username = request.POST['username']
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     email = request.POST['email']
-    password = request.POST['password']
     is_superuser = request.POST.get('is_superuser', False)
 
     user = get_object_or_404(User, pk=pk)
-    user.username = username
     user.first_name = first_name
     user.last_name = last_name
     user.email = email

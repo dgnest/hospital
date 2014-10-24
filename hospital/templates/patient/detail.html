@@ -1,38 +1,78 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-primary">
 
-  <h1>Paciente DNI: {{ object.dni }}</h1>
-  <p>creador: {{ object.superuser.username }}</p>
-  <p>nombre: {{ object.first_name }}</p>
-  <p>apellido: {{ object.last_name }}</p>
-  <p>edad: {{ object.age }}</p>
-  <p>sexo: {{ object.sex }}</p>
-  <p>direccion: {{ object.address }}</p>
-  <p>email: {{ object.email }}</p>
-  <p>telefono: {{ object.telephone }}</p>
-  <p>celular: {{ object.cellphone }}</p>
-  <p>Esta Internado: {{ object.is_inpatient }}</p>
-  <p>Fecha de Creacion: {{ object.date_joined|date }}</p>
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      Detalle del Paciente <strong>{{ object.first_name|title }} {{ object.last_name|title }}</strong> <i class="fa fa-wheelchair"></i>
+    </h1>
+  </div>
 
-  <p>
-    <a href="{% url 'patient_app:patients-list' %}"> Volver a la Lista </a>
-  </p>
-  <p>
-    <a href="{% url 'patient_app:patients-update' object.dni %}"> Modificar Paciente </a>
-  </p>
-  <p>
-    <a href="{% url 'patient_app:patients-delete' object.dni %}"> Eliminar Paciente </a>
-  </p>
+  <article class="panel-body">
+    {% if object.is_inpatient %}
+      <div class="alert alert-warning" role="alert">El paciente <strong>se encuentra internado!</strong></div>
+    {% else %}
+      <div class="alert alert-success" role="alert">El paciente <strong>NO se encuentra internado...</strong></div>
+    {% endif %}
 
-</body>
+    {% if object.dni %}
+      <p>DNI: <strong>{{ object.dni }}</strong></p>
+    {% endif %}
+    
+    {% if object.superuser %}
+      <p>Creador: <strong>{{ object.superuser.username }}</strong></p>
+    {% endif %}
+    
+    {% if object.first_name %}
+      <p>Nombres: <strong>{{ object.first_name|title }}</strong></p>
+    {% endif %}
+    
+    {% if object.last_name %}
+      <p>Apellidos: <strong>{{ object.last_name|title }}</strong></p>
+    {% endif %}
+    
+    {% if object.age %}
+      <p>Edad: <strong>{{ object.age }}</strong></p>
+    {% endif %}
+    
+    {% if object.sex %}
+      <p>Sexo: <strong>{{ object.sex }}</strong></p>
+    {% endif %}
+    
+    {% if object.address %}
+      <p>Dirección: <strong>{{ object.address }}</strong></p>
+    {% endif %}
+    
+    {% if object.email %}
+      <p>Email: <strong>{{ object.email }}</strong></p>
+    {% endif %}
+    
+    {% if object.telephone %}
+      <p>Teléfono: <strong>{{ object.telephone }}</strong></p>
+    {% endif %}
+    
+    {% if object.telephone %}
+      <p>Celular: <strong>{{ object.cellphone }}</strong></p>
+    {% endif %}
+    
+    {% if object.date_joined %}
+      <p>Fecha de Creación: <strong>{{ object.date_joined|date }}</strong></p>
+    {% endif %}
 
-</html>
+    <p>
+      <a href="{% url 'patient_app:patients-list' %}" class="btn btn-primary btn-block"> Volver a la Lista </a>
+    </p>
+    <p>
+      <a href="{% url 'patient_app:patients-update' object.dni %}" class="btn btn-primary btn-block"> Modificar Paciente </a>
+    </p>
+    <p>
+      <a href="{% url 'patient_app:patients-delete' object.dni %}" class="btn btn-primary btn-block"> Eliminar Paciente </a>
+    </p>
+  </article>
+
+</div>
+
+{% endblock content %}

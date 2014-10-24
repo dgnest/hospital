@@ -1,83 +1,88 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <link rel="stylesheet" href="">
-</head>
+{% block content %}
 
-<body>
+<div class="panel panel-primary">
 
-  <h1>Modificar Paciente</h1>
-  <form action="" method="post">
-    {% csrf_token %}
-    <p>
-      <label for="">dni</label>
-      <input name="dni" type="text" value="{{ patient.dni }}">
-    </p>
+  <div class="panel-heading">
+    <h1 class="panel-title">Modificar Paciente</h1>
+  </div>
 
-    <p>
-      <label for="">first_name</label>
-      <input name="first_name" type="text" value="{{ patient.first_name }}">
-    </p>
+  <article class="panel-body">
+    <form action="" method="post" role="form">
+      {% csrf_token %}
 
-    <p>
-      <label for="">last_name</label>
-      <input name="last_name" type="text" value="{{ patient.last_name }}">
-    </p>
+      <div class="form-group">
+        <label for="dni">DNI</label>
+        <input name="dni" id="dni" type="text" value="{{ patient.dni }}" class="form-control" readonly>
+      </div>
 
-    <p>
-      <label for="">age</label>
-      <input name="age" type="number" value="{{ patient.age }}">
-    </p>
+      <div class="form-group">
+        <label for="first_name">Nombres</label>
+        <input name="first_name" id="first_name" type="text" value="{{ patient.first_name }}" class="form-control" required>
+      </div>
 
-    <p>
-      <label for="">sex</label>
-      <select name="sex">
-        <option value="M" {% if patient.sex == "M" %} selected {% endif %}>Masculino</option>
-        <option value="F" {% if patient.sex == "F" %} selected {% endif %}>Femenino</option>
-      </select>
-    </p>
+      <div class="form-group">
+        <label for="last_name">Apellido</label>
+        <input name="last_name" id="last_name" type="text" value="{{ patient.last_name }}" class="form-control" required>
+      </div>
 
-    <p>
-      <label for="">address</label>
-      <input name="address" type="text" value="{{ patient.address }}">
-    </p>
+      <div class="form-group">
+        <label for="age">Edad</label>
+        <input name="age" id="age" type="number" value="{{ patient.age }}" class="form-control" required>
+      </div>
 
-    <p>
-      <label for="">email</label>
-      <input name="email" type="email" value="{{ patient.email }}">
-    </p>
+      <div class="form-group">
+        <label for="sex">Sexo</label>
+        <select name="sex" id="sex" class="form-control" required>
+          <option value="M" {% if patient.sex == "M" %} selected {% endif %}>Masculino</option>
+          <option value="F" {% if patient.sex == "F" %} selected {% endif %}>Femenino</option>
+        </select>
+      </div>
 
-    <p>
-      <label for="">telephone</label>
-      <input name="telephone" type="text" value="{{ patient.telephone }}">
-    </p>
+      <div class="form-group">
+        <label for="address">Dirección</label>
+        <input name="address" id="address" type="text" value="{{ patient.address }}" class="form-control">
+      </div>
 
-    <p>
-      <label for="">cellphone</label>
-      <input name="cellphone" type="text" value="{{ patient.cellphone }}">
-    </p>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input name="email" id="email" type="email" value="{{ patient.email }}" class="form-control">
+      </div>
 
-    <p>
-      <label for="">is_inpatient</label>
-      <input name="is_inpatient" type="checkbox" value="{{ patient.is_inpatient }}" {% if patient.is_inpatient %} checked {% endif %}>
-    </p>
+      <div class="form-group">
+        <label for="telephone">Teléfono</label>
+        <input name="telephone" id="telephone" type="text" value="{{ patient.telephone }}" class="form-control">
+      </div>
 
-    <input type="submit" value="Update" />
-  </form>
+      <div class="form-group">
+        <label for="cellphone">Celular</label>
+        <input name="cellphone" id="cellphone" type="text" value="{{ patient.cellphone }}" class="form-control">
+      </div>
 
-  <section>
-    <p>
-      <a href="{% url 'patient_app:patients-list' %}"> Volver a la Lista </a>
-    </p>
-    <p>
-      <a href="{% url 'patient_app:patients-delete' patient.dni %}"> Eliminar Paciente </a>
-    </p>
-  </section>
+      <div class="checkbox">
+        <label>
+          <input name="is_inpatient" type="checkbox" value="{{ patient.is_inpatient }}" {% if patient.is_inpatient %} checked {% endif %}> ¿Está Internado?
+        </label>
+      </div>
 
-</body>
+      <p>
+        <button type="submit" class="btn btn-success btn-block"/>Modificar</button>
+      </p>
+    </form>
 
-</html>
+    <section>
+      <p>
+        <a href="{% url 'patient_app:patients-list' %}" class="btn btn-primary btn-block"> Volver a la Lista </a>
+      </p>
+      <p>
+        <a href="{% url 'patient_app:patients-delete' patient.dni %}" class="btn btn-primary btn-block"> Eliminar Paciente </a>
+      </p>
+    </section>
+  </article>
+  
+</div>
+
+{% endblock content %}
+

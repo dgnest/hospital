@@ -31,7 +31,13 @@
           <td>{{ patient.first_name }}</td>
           <td>{{ patient.last_name }}</td>
           <td>{{ patient.age }}</td>
-          <td>{{ patient.sex }}</td>
+          <td>
+            {% if patient.sex == 'M' %}
+              <i class="fa fa-male"></i> M
+            {% else %}
+              <i class="fa fa-female"></i> F
+            {% endif %}
+          </td>
           <td>{{ patient.email }}</td>
           <td>
             {% if patient.is_inpatient %}
