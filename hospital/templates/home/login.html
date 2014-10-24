@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<head>
-  <title>Login</title>
-</head>
-
-<body>
-
+{% block content %}
   <h1>Login</h1>
 
   <form role="form" method="POST">
@@ -21,8 +16,4 @@
     </div>
     <button type="submit" class="btn btn-default">Log in</button>
   </form>
-
-
-</body>
-
-</html>
+{% endblock content %}
