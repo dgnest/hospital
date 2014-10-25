@@ -9,6 +9,9 @@ from django.utils.translation import ugettext_lazy as _
 
 
 def login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('patient_app:patients-list'))
+
     message = ""
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
