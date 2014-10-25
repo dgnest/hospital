@@ -10,7 +10,7 @@
   </div>
 
   <article class="panel-body">
-    <form action="" method="post" role="form">
+    <form action="" method="post" role="form" id="js-form">
       {% csrf_token %}
       <div class="form-group">
         <label for="patient">Paciente</label>
@@ -19,7 +19,7 @@
 
       <div class="form-group">
         <label for="dni">DNI</label>
-        <input id="dni" type="text" value="{{ patient.dni }}" class="form-control" readonly>
+        <input id="dni" type="text" value="{{ patient.dni }}" class="form-control js-dni" readonly>
       </div>
 
       <div class="form-group">
@@ -29,17 +29,41 @@
 
       <div class="form-group">
         <label for="prescription">Receta médica</label>
-        <textarea rows="3" name="prescription" id="prescription" type="text" class="form-control" required></textarea>
+        <div class="row row-medicine clone" style="display:none">
+          <div class="col-xs-5">
+            <span class="col-sm-4 control-label center-label">Medicamento</span>
+            <div class="col-sm-8">
+              <select class="form-control js-select-medicine">
+              </select>
+            </div>
+          </div>
+
+          <div class="col-xs-4">
+            <div class="form-group">
+              <span class="col-sm-3 control-label center-label">Cantidad</span>
+              <div class="col-sm-9">
+                <input class="form-control js-amount-medicine" type="number" name="quantity" min="1" max="50" value="1">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-2">
+            <i class="fa fa-plus-circle fa-2x fa-add js-add" title="Agregar"></i>
+            <i class="fa fa-minus-circle fa-2x fa-delete js-delete" style="display:none" title="Eliminar"></i>
+          </div>
+        </div>
+
+        <div class="js-container-medicaments"></div>
       </div>
 
       <div class="checkbox">
         <label>
-          <input name="is_inpatient" type="checkbox"> ¿Será Internado?
+          <input name="is_inpatient" id="js-isInpatient" type="checkbox"> ¿Será Internado?
         </label>
       </div>
 
       <p>
-        <button type="submit" class="btn btn-success btn-block"/> Crear</button>
+        <button type="submit" class="btn btn-success btn-block js-submit" data-loading-text="Enviando..."/> Crear</button>
       </p>
     </form>
 
@@ -49,3 +73,8 @@
   </article>
 
 {% endblock content %}
+
+{% block js %}
+  {{ block.super }}
+  <script src="{% static 'js/medicine.js' %}"></script>
+{% endblock js %}

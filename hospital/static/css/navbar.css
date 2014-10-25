@@ -1,0 +1,47 @@
+body {
+/*  padding-top: 20px;
+  padding-bottom: 20px;*/
+}
+.navbar {
+  margin-bottom: 20px;
+}
+.panel-title {
+  font-size: 28px;
+}
+.fa-male {
+  font-size: 20px;
+}
+.fa-female {
+  font-size: 20px;
+}
+td .fa-file-text {
+  font-size: 20px;
+}
+td .fa-stethoscope {
+  font-size: 20px;
+}
+
+.center-label {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.fa-add, .fa-delete {
+	cursor: pointer;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.fa-add {
+	color: #2ecc71;
+}
+
+.fa-delete {
+	color: #e74c3c;
+}
+
+.row-medicine {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	background-color: rgba(236, 240, 241,0.5);
+}
