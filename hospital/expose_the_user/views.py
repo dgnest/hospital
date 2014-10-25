@@ -37,9 +37,30 @@ class UserViewSet(viewsets.ModelViewSet):
         super(UserViewSet, self).pre_save(obj)
 
 
-class UserListView(LoginRequiredMixin, ListView):
-    model = User
-    template_name = 'expose_the_user/list.html'
+def user_list_view(request):
+    if not request.user.is_authenticated():
+        return HttpResponseNotAllowed(['GET'])
+
+    my_users = None
+    search = request.GET.get("search", False)
+    if search:
+        try:
+            my_users = User.objects.filter(username__icontains=search) | \
+                User.objects.filter(first_name__icontains=search) | \
+                User.objects.filter(last_name__icontains=search)
+        except Exception, e:
+            my_users = None
+
+    if not my_users:
+        my_users = User.objects.all()
+
+    ctx = {'my_users': my_users}
+
+    return render_to_response(
+        'expose_the_user/list.html',
+        ctx,
+        context_instance=RequestContext(request),
+    )
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

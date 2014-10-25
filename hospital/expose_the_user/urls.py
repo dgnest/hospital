@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url
-from .views import UserListView, UserDetailView, UserDeleteView
+from .views import user_list_view, UserDetailView, UserDeleteView
 from .views import user_create_view, user_update_view
 
 
 urlpatterns = patterns(
     '',
-    url(r'^$', UserListView.as_view(), name='users-list'),
+    url(r'^$', user_list_view, name='users-list'),
     url(
         r'^create/$',
         user_create_view,

@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-    {% for my_user in object_list %}
+    {% for my_user in my_users %}
     <tr>
     <td><a href="{% url 'user_app:users-detail' my_user.id %}">{{ my_user.username }}</a></td>
     <td>{{ my_user.first_name }}</td>
