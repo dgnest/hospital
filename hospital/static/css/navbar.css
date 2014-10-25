@@ -1,0 +1,22 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.navbar {
+  margin-bottom: 20px;
+}
+.panel-title {
+  font-size: 28px;
+}
+.fa-male {
+  font-size: 20px;
+}
+.fa-female {
+  font-size: 20px;
+}
+td .fa-file-text {
+  font-size: 20px;
+}
+td .fa-stethoscope {
+  font-size: 20px;
+}
