@@ -10,7 +10,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', ' ')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', 'False'))
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
 
@@ -27,6 +27,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'gunicorn',
+    'rosetta',
     'patient',
     'expose_the_user',
     'consultation',

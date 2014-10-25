@@ -40,7 +40,10 @@ urlpatterns = patterns(
     # Medicine app.
     url(r'^medicines/', include('medicine.urls', namespace='medicine_app')),
     # Medicine app.
-    url(r'^consultation/', include('consultation.urls', namespace='consultation_app')),
+    url(
+        r'^consultation/',
+        include('consultation.urls', namespace='consultation_app')
+    ),
 )
 
 
@@ -52,4 +55,10 @@ if settings.DEBUG:
             'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}
         )
+    )
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns(
+        '',
+        url(r'^rosetta/', include('rosetta.urls')),
     )
