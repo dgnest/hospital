@@ -51,10 +51,10 @@
           <td>{{ patient.superuser.username }}</td>
           <td>{{ patient.date_joined|date }}</td>
           <td>
-            <a href="#"><i class="fa fa-file-text"></i></a>
+            <a href="{% url 'consultation_app:medical-history' patient.dni %}"><i class="fa fa-file-text"></i></a>
           </td>
           <td>
-            <a href="#"><i class="fa fa-stethoscope"></i></a>
+            <a href="{% url 'consultation_app:medical-consultation' patient.dni %}"><i class="fa fa-stethoscope"></i></a>
           </td>
         </tr>
       {% empty %}

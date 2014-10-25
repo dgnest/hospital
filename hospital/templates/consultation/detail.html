@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      Detalle de la Consulta del <strong>{{ consultation.date_performed|date }}</strong>
+    </h1>
+  </div>
+
+  <article class="panel-body">
+
+    {% if consultation.is_inpatient %}
+      <div class="alert alert-warning" role="alert">El paciente <strong>estuvo internado!</strong></div>
+    {% else %}
+      <div class="alert alert-success" role="alert">El paciente <strong>NO estuvo internado...</strong></div>
+    {% endif %}
+
+    {% if consultation.patient %}
+      <p>Paciente: <strong>{{ consultation.patient.first_name|title }} {{ consultation.patient.last_name|title }}</strong></p>
+    {% endif %}
+
+    {% if consultation.diagnosis %}
+      <p>Diagnostico: <strong>{{ consultation.diagnosis }}</strong></p>
+    {% endif %}
+
+    {% if consultation.prescription %}
+      <p>Receta: <strong>{{ consultation.prescription }}</strong></p>
+    {% endif %}
+
+    {% if consultation.doctor %}
+      <p>Doctor a Cargo: <strong>{{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}</strong></p>
+    {% endif %}
+
+    <p>
+      <a href="{% url 'consultation_app:medical-history' consultation.patient.dni %}" class="btn btn-success btn-block"> Volver al Historial </a>
+    </p>
+    <p>
+      <a href="{% url 'patient_app:patients-list' %}" class="btn btn-primary btn-block"> Volver a la Lista de Pacientes </a>
+    </p>
+
+  </article>
+
+</div>
+
+{% endblock content %}

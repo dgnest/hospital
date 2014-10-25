@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from hospital.permissions import IsSuperuserOrReadOnly
 from hospital.mixins import LoginRequiredMixin
-from .serializers import MedicineSerializer
-from .models import Medicine
+from .serializers import MedicineSerializer, MedicinePerConsultationSerializer
+from .models import Medicine, MedicinePerConsultation
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic import DeleteView
@@ -13,6 +13,20 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
+
+
+class MedicinePerConsultationViewSet(viewsets.ModelViewSet):
+
+    queryset = MedicinePerConsultation.objects.all()
+    serializer_class = MedicinePerConsultationSerializer
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsSuperuserOrReadOnly,
+    )
+    filter_fields = (
+        'medical_consultation',
+        'medicine',
+    )
 
 
 class MedicineViewSet(viewsets.ModelViewSet):

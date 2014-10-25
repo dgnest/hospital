@@ -5,6 +5,7 @@ from hospital.permissions import IsSuperuserOrReadOnly
 from hospital.mixins import LoginRequiredMixin
 from .serializers import MedicalConsultationSerializer
 from .models import MedicalConsultation
+from patient.models import Patient
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic import DeleteView
@@ -33,3 +34,45 @@ class MedicalConsultationViewSet(viewsets.ModelViewSet):
         user = self.request.user
         obj.doctor = user
         super(MedicalConsultationViewSet, self).pre_save(obj)
+
+
+def medical_consultation(request, dni):
+    if not request.user.is_authenticated():
+        return HttpResponseNotAllowed(['GET'])
+
+    patient = Patient.objects.get(pk=dni)
+    ctx = {'patient': patient}
+
+    return render_to_response(
+        'consultation/create.html',
+        ctx,
+        context_instance=RequestContext(request),
+    )
+
+
+def medical_history(request, dni):
+    if not request.user.is_authenticated():
+        return HttpResponseNotAllowed(['GET'])
+
+    consultations = MedicalConsultation.objects.filter(patient=dni)
+    ctx = {'consultations': consultations}
+
+    return render_to_response(
+        'consultation/list.html',
+        ctx,
+        context_instance=RequestContext(request),
+    )
+
+
+def detailed_consultation(request, pk):
+    if not request.user.is_authenticated():
+        return HttpResponseNotAllowed(['GET'])
+
+    consultation = get_object_or_404(MedicalConsultation, pk=pk)
+    ctx = {'consultation': consultation}
+
+    return render_to_response(
+        'consultation/detail.html',
+        ctx,
+        context_instance=RequestContext(request),
+    )
