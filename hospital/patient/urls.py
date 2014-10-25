@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url
-from .views import PatientListView, PatientDetailView, PatientDeleteView
+from .views import patient_list_view, PatientDetailView, PatientDeleteView
 from .views import patient_create_view, patient_update_view
 
 
 urlpatterns = patterns(
     '',
-    url(r'^$', PatientListView.as_view(), name='patients-list'),
+    url(r'^$', patient_list_view, name='patients-list'),
     url(
         r'^create/$',
         patient_create_view,

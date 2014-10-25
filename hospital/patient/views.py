@@ -40,9 +40,30 @@ class PatientViewSet(viewsets.ModelViewSet):
         super(PatientViewSet, self).pre_save(obj)
 
 
-class PatientListView(LoginRequiredMixin, ListView):
-    model = Patient
-    template_name = 'patient/list.html'
+def patient_list_view(request):
+    if not request.user.is_authenticated():
+        return HttpResponseNotAllowed(['GET'])
+
+    patients = None
+    search = request.GET.get("search", False)
+    if search:
+        try:
+            patients = Patient.objects.filter(dni__icontains=search) | \
+                Patient.objects.filter(first_name__icontains=search) | \
+                Patient.objects.filter(last_name__icontains=search)
+        except Exception, e:
+            patients = None
+
+    if not patients:
+        patients = Patient.objects.all()
+
+    ctx = {'patients': patients}
+
+    return render_to_response(
+        'patient/list.html',
+        ctx,
+        context_instance=RequestContext(request),
+    )
 
 
 class PatientDetailView(LoginRequiredMixin, DetailView):
