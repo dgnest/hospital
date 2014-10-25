@@ -9,6 +9,7 @@ class MedicalConsultationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalConsultation
         fields = (
+            'id',
             'doctor',
             'patient',
             'prescription',
