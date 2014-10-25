@@ -3,6 +3,13 @@
 
 {% block content %}
 
+{% if medicines|length == 0 %}
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    Aún no hay medicamentos, <a href="{% url 'medicine_app:medicines-create' %}">por favor ingrese uno</a>.
+  </div>
+{% endif %}
+
 <div class="panel panel-primary">
 
   <div class="panel-heading">
@@ -26,8 +33,6 @@
           <td>{{ medicine.medicine_type }}</td>
           <td>{{ medicine.amount }}</td>
         </tr>
-      {% empty %}
-        Aun no hay medicinas!
       {% endfor %}
     </tbody>
   </table>
