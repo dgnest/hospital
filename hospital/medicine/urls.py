@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url
-from .views import MedicineListView, MedicineDetailView, MedicineDeleteView
+from .views import medicine_list_view, MedicineDetailView, MedicineDeleteView
 from .views import medicine_create_view, medicine_update_view
 
 
 urlpatterns = patterns(
     '',
-    url(r'^$', MedicineListView.as_view(), name='medicines-list'),
+    url(r'^$', medicine_list_view, name='medicines-list'),
     url(
         r'^create/$',
         medicine_create_view,

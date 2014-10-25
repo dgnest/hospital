@@ -43,9 +43,30 @@ class MedicineViewSet(viewsets.ModelViewSet):
     )
 
 
-class MedicineListView(LoginRequiredMixin, ListView):
-    model = Medicine
-    template_name = 'medicine/list.html'
+def medicine_list_view(request):
+    if not request.user.is_authenticated():
+        return HttpResponseNotAllowed(['GET'])
+
+    medicines = None
+    search = request.GET.get("search", False)
+    if search:
+        try:
+            medicines = Medicine.objects.filter(code__icontains=search) | \
+                Medicine.objects.filter(name__icontains=search) | \
+                Medicine.objects.filter(medicine_type__icontains=search)
+        except Exception, e:
+            medicines = None
+
+    if not medicines:
+        medicines = Medicine.objects.all()
+
+    ctx = {'medicines': medicines}
+
+    return render_to_response(
+        'medicine/list.html',
+        ctx,
+        context_instance=RequestContext(request),
+    )
 
 
 class MedicineDetailView(LoginRequiredMixin, DetailView):

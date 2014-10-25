@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for medicine in object_list %}
+      {% for medicine in medicines %}
         <tr>
           <td><a href="{% url 'medicine_app:medicines-detail' medicine.code %}">{{ medicine.code }}</a></td>
           <td>{{ medicine.name }}</td>
