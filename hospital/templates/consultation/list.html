@@ -23,7 +23,11 @@
       <tbody>
         {% for consultation in consultations %}
           <tr>
-            <td>{{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}</td>
+            {% if consultation.doctor.first_name %}
+              <td>{{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}</td>
+            {% else %}
+              <td>{{ consultation.doctor|title }}</td>
+            {% endif %}
             <td>{{ consultation.diagnosis }}</td>
             <td>
               {% if consultation.is_inpatient %}
