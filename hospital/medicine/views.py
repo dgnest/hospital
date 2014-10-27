@@ -56,8 +56,7 @@ def medicine_list_view(request):
                 Medicine.objects.filter(medicine_type__icontains=search)
         except Exception, e:
             medicines = None
-
-    if not medicines:
+    else:
         medicines = Medicine.objects.all()
 
     ctx = {'medicines': medicines}

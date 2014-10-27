@@ -2,6 +2,14 @@
 {% load staticfiles %}
 
 {% block content %}
+
+{% if not my_users %}
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    No hay usuarios! 
+  </div>
+{% endif %}
+
 <div class="panel panel-primary">
 
   <div class="panel-heading">
@@ -20,21 +28,19 @@
     </thead>
     <tbody>
     {% for my_user in my_users %}
-    <tr>
-    <td><a href="{% url 'user_app:users-detail' my_user.id %}">{{ my_user.username }}</a></td>
-    <td>{{ my_user.first_name }}</td>
-    <td>{{ my_user.last_name }}</td>
-    <td>
-      {% if my_user.is_superuser %}
-        <span class="glyphicon glyphicon-remove"></span>
-      {% else %}
-        <span class="glyphicon glyphicon-ok"></span>
-      {% endif %}
-    </td>
-    <td>{{ my_user.date_joined|date }}</td>
-    </tr>
-    {% empty %}
-        No Hay Usuarios!
+      <tr>
+      <td><a href="{% url 'user_app:users-detail' my_user.id %}">{{ my_user.username }}</a></td>
+      <td>{{ my_user.first_name }}</td>
+      <td>{{ my_user.last_name }}</td>
+      <td>
+        {% if my_user.is_superuser %}
+          <span class="glyphicon glyphicon-remove"></span>
+        {% else %}
+          <span class="glyphicon glyphicon-ok"></span>
+        {% endif %}
+      </td>
+      <td>{{ my_user.date_joined|date }}</td>
+      </tr>
     {% endfor %}
     </tbody>
   </table>

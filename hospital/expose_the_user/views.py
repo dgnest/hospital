@@ -50,8 +50,7 @@ def user_list_view(request):
                 User.objects.filter(last_name__icontains=search)
         except Exception, e:
             my_users = None
-
-    if not my_users:
+    else:
         my_users = User.objects.all()
 
     ctx = {'my_users': my_users}

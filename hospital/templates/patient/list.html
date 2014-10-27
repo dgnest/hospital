@@ -6,10 +6,10 @@
 {% if not patients %}
   <div class="alert alert-warning alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    Aún no hay pacientes, 
+    Aún no hay pacientes! 
     {% if user.is_superuser %}
       <a href="{% url 'patient_app:patients-create' %}">
-        por favor ingrese uno</a>.
+        Por favor ingrese uno</a>.
     {% endif %}
   </div>
 {% endif %}
