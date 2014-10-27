@@ -53,8 +53,7 @@ def patient_list_view(request):
                 Patient.objects.filter(last_name__icontains=search)
         except Exception, e:
             patients = None
-
-    if not patients:
+    else:
         patients = Patient.objects.all()
 
     ctx = {'patients': patients}
