@@ -22,7 +22,6 @@ class MedicalConsultationViewSet(viewsets.ModelViewSet):
     serializer_class = MedicalConsultationSerializer
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
-        IsSuperuserOrReadOnly,
     )
     filter_fields = (
         'doctor',
