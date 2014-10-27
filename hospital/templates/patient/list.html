@@ -3,6 +3,13 @@
 
 {% block content %}
 
+{% if patients|length == 0 %}
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    Aún no hay pacientes, <a href="{% url 'patient_app:patients-create' %}">por favor ingrese uno</a>.
+  </div>
+{% endif %}
+
 <div class="panel panel-primary">
 
   <div class="panel-heading">
@@ -57,8 +64,6 @@
             <a href="{% url 'consultation_app:medical-consultation' patient.dni %}"><i class="fa fa-stethoscope"></i></a>
           </td>
         </tr>
-      {% empty %}
-        Aun no hay pacientes!
       {% endfor %}
     </tbody>
   </table>

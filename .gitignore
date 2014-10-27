@@ -1,4 +1,6 @@
 # Development static and media files
+# static
+staticfiles
 media
 
 # Redis 
