@@ -82,6 +82,12 @@ function createMedicineContainer(medicines) {
   $medicine.show();
 
   var $select = $medicine.find('.js-select-medicine');
+  
+  // create an empty medicine
+  var option = document.createElement("option");
+  option.text = 'Sin medicamentos';
+  $(option).appendTo($select);
+
   for (var i = 0; i < medicines.length; i++) {
     var option = document.createElement("option");
     option.text = medicines[i].getName();
@@ -110,6 +116,7 @@ function appendNewMedicament() {
 function sendForm(callback) {
   var patient = $('.js-dni').val(),
       diagnosis = $('#diagnosis').val(),
+      prescription = $('#prescription').val(),
       is_inpatient = $('#js-isInpatient').is(":checked");
 
   if(!diagnosis){
@@ -123,7 +130,7 @@ function sendForm(callback) {
     contentType: 'application/json',
     data: JSON.stringify({
       "patient": patient,
-      "prescription": 'nada',
+      "prescription": prescription,
       "diagnosis": diagnosis, 
       "is_inpatient": is_inpatient
     }),
@@ -142,16 +149,21 @@ function sendMedicaments(idConsult, callback) {
   var $medicaments = $('.row-medicine:not(.clone)');
   for (var i = 0; i < $medicaments.length; i++) {
     
-    var medicament = $($medicaments[i]).find('.js-select-medicine')[0];
+    var medicament = $($medicaments[i]).find('.js-select-medicine')[0],
+        medicine = $(medicament.options[medicament.selectedIndex]).attr('code'),
+        amount = $($medicaments[i]).find('.js-amount-medicine').val();
 
-    jsonArray.push({
-      "medical_consultation": idConsult, 
-      "medicine": $(medicament.options[medicament.selectedIndex]).attr('code'), 
-      "amount": $($medicaments[i]).find('.js-amount-medicine').val()
-    });
+    if( medicine && amount){
+      jsonArray.push({
+        "medical_consultation": idConsult, 
+        "medicine": medicine,
+        "amount": amount
+      });
+    }
+    
   }
 
-  var total = $medicaments.length,
+  var total = jsonArray.length,
       conta = 0, 
       sendToApi = function(id) {
         $.ajax({
