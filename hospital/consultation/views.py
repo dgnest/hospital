@@ -5,6 +5,7 @@ from hospital.permissions import IsSuperuserOrReadOnly
 from hospital.mixins import LoginRequiredMixin
 from .serializers import MedicalConsultationSerializer
 from .models import MedicalConsultation
+from medicine.models import MedicinePerConsultation
 from patient.models import Patient
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -54,7 +55,10 @@ def medical_history(request, dni):
         return HttpResponseNotAllowed(['GET'])
 
     consultations = MedicalConsultation.objects.filter(patient=dni)
-    ctx = {'consultations': consultations}
+    ctx = {
+        'consultations': consultations,
+        'patient_dni': dni,
+    }
 
     return render_to_response(
         'consultation/list.html',
@@ -68,7 +72,14 @@ def detailed_consultation(request, pk):
         return HttpResponseNotAllowed(['GET'])
 
     consultation = get_object_or_404(MedicalConsultation, pk=pk)
-    ctx = {'consultation': consultation}
+
+    medicines_per_consultation = MedicinePerConsultation.objects.filter(
+        medical_consultation=pk,
+    )
+    ctx = {
+        'consultation': consultation,
+        'medicines_per_consultation': medicines_per_consultation,
+    }
 
     return render_to_response(
         'consultation/detail.html',

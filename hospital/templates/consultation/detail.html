@@ -35,13 +35,38 @@
       <p>Doctor a Cargo: <strong>{{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}</strong></p>
     {% endif %}
 
+    <h2>Medicinas</h2>
+
+  </article>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>        
+          <th>Nombre</th>        
+          <th>Cantidad Suministrada</th> 
+          <th>Detalle</th> 
+        </tr>
+      </thead>
+      <tbody>
+        {% for medicine_per_consultation in medicines_per_consultation %}
+          <tr>
+            <td>{{ medicine_per_consultation.medicine.code }}</td>
+            <td>{{ medicine_per_consultation.medicine.name|title }}</td>
+            <td>{{ medicine_per_consultation.amount }}</td>
+            <td><a href="{% url 'medicine_app:medicines-detail' medicine_per_consultation.medicine.code %}"><i class="fa fa-eye"></i></a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  <article class="panel-body">
     <p>
       <a href="{% url 'consultation_app:medical-history' consultation.patient.dni %}" class="btn btn-success btn-block"> Volver al Historial </a>
     </p>
     <p>
       <a href="{% url 'patient_app:patients-list' %}" class="btn btn-primary btn-block"> Volver a la Lista de Pacientes </a>
     </p>
-
   </article>
 
 </div>
