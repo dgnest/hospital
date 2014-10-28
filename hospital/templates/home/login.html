@@ -2,18 +2,20 @@
 {% load staticfiles %}
 
 {% block content %}
-  <h1>Login</h1>
+  <section class="center-block">
+    <h1>Ingreso</h1>
 
-  <form role="form" method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="inputEmail">Usuario o Email</label>
-      <input name="username" type="text" class="form-control" id="inputEmail" placeholder="Ingrese usuario">
-    </div>
-    <div class="form-group">
-      <label for="inputPassword">Contraseña</label>
-      <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Ingrese contraseña">
-    </div>
-    <button type="submit" class="btn btn-default">Log in</button>
-  </form>
+    <form role="form" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="inputEmail">Usuario</label>
+        <input name="username" type="text" class="form-control" id="inputEmail" placeholder="Ingrese usuario">
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Contraseña</label>
+        <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Ingrese contraseña">
+      </div>
+      <button type="submit" class="btn btn-default">Ingresar</button>
+    </form>
+  </section>
 {% endblock content %}
