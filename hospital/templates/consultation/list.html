@@ -3,50 +3,51 @@
 
 {% block content %}
 
+{% if not consultations %}
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    El paciente no tiene historia clínica!
+  </div>
+{% endif %}
+
 <div class="panel panel-primary">
 
   <div class="panel-heading">
     <h1 class="panel-title">Historial Médico</h1>
   </div>
 
-  {% if consultations %}
-    <table class="table table-striped">
-      <thead>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Doctor a Cargo</th>        
+        <th>Diagnóstico</th>        
+        <th>¿Estuvo Internado?</th>      
+        <th>Fecha</th>      
+        <th>Detalle</th>      
+      </tr>
+    </thead>
+    <tbody>
+      {% for consultation in consultations %}
         <tr>
-          <th>Doctor a Cargo</th>        
-          <th>Diagnóstico</th>        
-          <th>¿Estuvo Internado?</th>      
-          <th>Fecha</th>      
-          <th>Detalle</th>      
-        </tr>
-      </thead>
-      <tbody>
-        {% for consultation in consultations %}
-          <tr>
-            {% if consultation.doctor.first_name %}
-              <td>{{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}</td>
+          {% if consultation.doctor.first_name %}
+            <td>{{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}</td>
+          {% else %}
+            <td>{{ consultation.doctor|title }}</td>
+          {% endif %}
+          <td>{{ consultation.diagnosis }}</td>
+          <td>
+            {% if consultation.is_inpatient %}
+              <span class="glyphicon glyphicon-ok"></span>
             {% else %}
-              <td>{{ consultation.doctor|title }}</td>
+              <span class="glyphicon glyphicon-remove"></span>
             {% endif %}
-            <td>{{ consultation.diagnosis }}</td>
-            <td>
-              {% if consultation.is_inpatient %}
-                <span class="glyphicon glyphicon-ok"></span>
-              {% else %}
-                <span class="glyphicon glyphicon-remove"></span>
-              {% endif %}
-            </td>
-            <td>{{ consultation.date_performed|date }}</td>
-            <td><a href="{% url 'consultation_app:detailed-consultation' consultation.id %}"><i class="fa fa-eye"></i></a></td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <article class="panel-body">
-      <h2>El paciente no tiene historia clínica!</h2>
-    </article>
-  {% endif %}
+          </td>
+          <td>{{ consultation.date_performed|date }}</td>
+          <td><a href="{% url 'consultation_app:detailed-consultation' consultation.id %}"><i class="fa fa-eye"></i></a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
   <article class="panel-body">
     <p>

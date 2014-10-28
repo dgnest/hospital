@@ -3,6 +3,17 @@
 
 {% block content %}
 
+{% if not consultations %}
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    {% if consultation.is_inpatient %}
+      El paciente <strong>estuvo internado!</strong>
+    {% else %}
+      El paciente <strong>recibió atención ambulatoria</strong>
+    {% endif %}
+  </div>
+{% endif %}
+
 <div class="panel panel-primary">
 
   <div class="panel-heading">
@@ -12,12 +23,6 @@
   </div>
 
   <article class="panel-body">
-
-    {% if consultation.is_inpatient %}
-      <div class="alert alert-warning" role="alert">El paciente <strong>estuvo internado!</strong></div>
-    {% else %}
-      <div class="alert alert-success" role="alert">El paciente <strong>NO estuvo internado...</strong></div>
-    {% endif %}
 
     {% if consultation.patient %}
       <p>Paciente: <strong>{{ consultation.patient.first_name|title }} {{ consultation.patient.last_name|title }}</strong></p>
@@ -31,14 +36,21 @@
       <p>Receta: <strong>{{ consultation.prescription }}</strong></p>
     {% endif %}
 
-    {% if consultation.doctor %}
-      <p>Doctor a Cargo: <strong>{{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}</strong></p>
+    <p>Doctor a Cargo: 
+    <strong>
+    {% if consultation.doctor.first_name %}
+       {{ consultation.doctor.first_name|title }} {{ consultation.doctor.last_name|title }}
+    {% else %}
+      {{ consultation.doctor.username }}
     {% endif %}
+    </strong>
+    </p>
 
     <h2>Medicinas</h2>
 
   </article>
 
+  {% if medicines_per_consultation %}
     <table class="table table-striped">
       <thead>
         <tr>
@@ -59,6 +71,15 @@
         {% endfor %}
       </tbody>
     </table>
+  {% else %}
+    <article class="panel-body">
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        El paciente no necesitó ser medicado!
+      </div>
+    </article>
+  {% endif %}
+
 
   <article class="panel-body">
     <p>
