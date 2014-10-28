@@ -33,14 +33,16 @@
     {% endif %}
  
     <p>
-      <a href="{% url 'medicine_app:medicines-list' %}" class="btn btn-primary btn-block"> Volver a la Lista </a>
+      <a href="{% url 'patient_app:patients-list' %}" class="btn btn-primary btn-block"> Volver a la Lista de Pacientes </a>
     </p>
-    <p>
-      <a href="{% url 'medicine_app:medicines-update' object.code %}" class="btn btn-primary btn-block"> Modificar Medicamento </a>
-    </p>
-    <p>
-      <a href="{% url 'medicine_app:medicines-delete' object.code %}" class="btn btn-primary btn-block"> Eliminar Medicamento </a>
-    </p>
+    {% if user.is_superuser %}
+      <p>
+        <a href="{% url 'medicine_app:medicines-update' object.code %}" class="btn btn-primary btn-block"> Modificar Medicamento </a>
+      </p>
+      <p>
+        <a href="{% url 'medicine_app:medicines-delete' object.code %}" class="btn btn-primary btn-block"> Eliminar Medicamento </a>
+      </p>
+    {% endif %}
   </article>
 
 </div>

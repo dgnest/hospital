@@ -66,7 +66,7 @@
             <td>{{ medicine_per_consultation.medicine.code }}</td>
             <td>{{ medicine_per_consultation.medicine.name|title }}</td>
             <td>{{ medicine_per_consultation.amount }}</td>
-            <td><a href="{% url 'medicine_app:medicines-detail' medicine_per_consultation.medicine.code %}"><i class="fa fa-eye"></i></a></td>
+            <td><a href="{% url 'medicine_app:medicines-detail' medicine_per_consultation.medicine.code %}" target="_blank"><i class="fa fa-eye"></i></a></td>
           </tr>
         {% endfor %}
       </tbody>
