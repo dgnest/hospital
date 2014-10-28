@@ -139,6 +139,9 @@ function sendForm(callback) {
   })
   .done(function(data) {
     sendMedicaments(data.id, callback);
+  })
+  .fail(function() {
+    callback(false);
   });
 
 }
@@ -182,6 +185,9 @@ function sendMedicaments(idConsult, callback) {
           } else {
             sendToApi(conta);
           }
+        })
+        .fail(function() {
+          callback(false);
         });
       };
 
